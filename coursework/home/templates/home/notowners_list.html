@@ -1,0 +1,54 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Workers</h1>
+    <p>on this page of the site you can see the database of workers of the car dealership, there is also a search for the love string of the element from the database, to create a new client, click the "create" button</p>
+    <input id="searchbar" onkeyup="search_workers()" type="text" name="search" placeholder="Search workers..">
+    <a href="{% url '_create' %}">Create</a>
+    {% if workers_list %}
+<table id="info-workers">
+    <thead>
+        <tr>
+            <th>
+                Full Name
+            </th>
+            <th>
+                Post
+            </th>
+            <th>
+                ID
+            </th>
+            <th>
+                Change
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+    <tbody id="list">
+      {% for worker in workers_list %}
+      <tr class="workers">
+          <td>
+              {{ worker.full_name }}
+          </td>
+          <td>
+              {{worker.post}}
+          </td>
+          <td>
+              {{worker.id}}
+          </td>
+          <td>
+              <a href="{% url 'worker_update' worker.id %}">Change</a>
+          </td>
+          <td>
+              <a href="{% url 'worker_delete' worker.id %}">Delete</a>
+          </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+    {% else %}
+      <p>There are no workers in the autoservice.</p>
+    {% endif %}
+{% endblock %}

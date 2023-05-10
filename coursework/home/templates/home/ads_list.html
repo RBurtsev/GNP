@@ -1,0 +1,54 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Ads</h1>
+    <p>on this page of the site you can see the ADS, to create a new ads to other owners, click the "create" button</p>
+    <input id="searchbar" onkeyup="search_parts()" type="text" name="search" placeholder="Search ads..">
+    <a href="{% url 'ads_create' %}">Create</a>
+    {% if ads_list %}
+<table id="info-parts">
+    <thead>
+        <tr>
+            <th>
+                Type
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Date_posted
+            </th>
+        </tr>
+    </thead>
+    <tbody id="list">
+      {% for ads in ads_list %}
+      <tr class="ads">
+          <td>
+              {{ ads.type_ads }}
+          </td>
+          <td>
+              {{ads.title}}
+          </td>
+          <td>
+              {{ads.author}}
+          </td>
+          <td>
+              {{ads.date_posted}}
+          </td>
+          <td>
+              {{ads.content}}
+          </td>
+          <td>
+              <a href="{% url 'ads_delete' ads.id %}">Delete</a>
+          </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+    {% else %}
+      <p>There are no workers in the autoservice.</p>
+    {% endif %}
+{% endblock %}

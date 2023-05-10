@@ -1,0 +1,69 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Clients</h1>
+    <p>on this page of the site you can see the database of clients of the car dealership, there is also a search for the love string of the element from the database, to create a new client, click the "create" button</p>
+    <input id="searchbar" onkeyup="search_owner()" type="text" name="search" placeholder="Search clients..">
+    <a href="{% url 'owner_create' %}">Create</a>
+    {% if owner_list %}
+<table id="info-clients">
+    <thead>
+        <tr>
+            <th>
+                Full Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Number car
+            </th>
+            <th>
+                Brand car
+            </th>
+            <th>
+                Id client
+            </th>
+            <th>
+                Change
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+    <tbody id="list">
+      {% for client in clients_list %}
+      <tr class="owners">
+          <td>
+              {{ owner.full_name }}
+          </td>
+          <td>
+              {{owner.mail}}
+          </td>
+          <td>
+              {{owner.phone}}
+          </td>
+          <td>
+              {{owner.land_adress}}
+          </td>
+          <td>
+              {{owner.home_adress}}
+          </td>
+          <td>
+              <a href="{% url 'owner_update' client.id %}">Change</a>
+          </td>
+          <td>
+              <a href="{% url 'owner_delete' client.id %}">Delete</a>
+          </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+    {% else %}
+      <p>There are no clients in the autoservice.</p>
+    {% endif %}
+{% endblock %}

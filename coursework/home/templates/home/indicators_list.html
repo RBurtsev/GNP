@@ -1,0 +1,55 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Parts</h1>
+    <p>on this page of the site you can see the database of customers of the car dealership, there is also a search for the love string of the element from the database, to create a new client, click the "create" button</p>
+    <input id="searchbar" onkeyup="search_indicator()" type="text" name="search" placeholder="Search parts..">
+    <a href="{% url 'indicators_create' %}">Create</a>
+    {% if parts_list %}
+<table id="info-parts">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Sum
+            </th>
+            <th>
+                average cost
+            </th>
+            <th>
+                Change
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+    <tbody id="list">
+      {% for part in parts_list %}
+      <tr class="indicators">
+          <td>
+              {{ indicator.gas }}
+          </td>
+          <td>
+              {{ indicator.electric }}
+          </td>
+          <td>
+              {{ indicator.water }}
+          </td>
+          <td>
+              <a href="{% url 'indicator_update' indicator.id %}">Change</a>
+          </td>
+          <td>
+              <a href="{% url 'indicator_delete' indicator.id %}">Delete</a>
+          </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+    {% else %}
+      <p>There are no parts in the autoservice.</p>
+    {% endif %}
+{% endblock %}
